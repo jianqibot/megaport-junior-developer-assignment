@@ -1,10 +1,10 @@
 
 import appAlgoUtil.Sorter;
-import appAlgoUtil.defaultSorter;
+import appAlgoUtil.DefaultSorter;
 import appFileUtil.AppFileReader;
 import appFileUtil.AppFileWriter;
-import appFileUtil.defaultTextAppFileReader;
-import appFileUtil.defaultTextAppFileWriter;
+import appFileUtil.DefaultTextAppFileReader;
+import appFileUtil.DefaultTextAppFileWriter;
 
 import java.util.List;
 
@@ -23,10 +23,17 @@ public class ConsoleApp {
 
 
     public static void main(String[] args) {
-        ConsoleApp app = new ConsoleApp(new defaultTextAppFileReader(), new defaultSorter(), new defaultTextAppFileWriter());
-        System.out.println(args[0]);
+        ConsoleApp app = new ConsoleApp(new DefaultTextAppFileReader(), new DefaultSorter(), new DefaultTextAppFileWriter());
+        System.out.println("sort-names " + args[0]);
         List<String> names = app.fileReader.readNamesFromFIle(args[0]);
         List<String> sortedNames = app.sorter.sort(names);
-        app.fileWriter.writeNamesIntoFile(args[0].replace(".txt", "-sorted.txt"), sortedNames);
+        if (sortedNames != null) {
+            sortedNames.forEach(System.out::println);
+        }
+        String newFileName = args[0].replace(".txt", "-sorted.txt");
+        int status = app.fileWriter.writeNamesIntoFile(newFileName, sortedNames);
+        if (status == 0) {
+            System.out.println("Finished: created " + newFileName);
+        }
     }
 }
