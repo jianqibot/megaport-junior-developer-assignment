@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface AppFileWriter {
 
-    void writeNamesIntoFile(String fileName, List<String> Names);
+    int writeNamesIntoFile(String fileName, List<String> Names);
 }

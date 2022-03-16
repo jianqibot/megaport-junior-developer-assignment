@@ -1,18 +1,18 @@
 package appFileUtil;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 import java.util.List;
 
-public class defaultTextAppFileReader implements AppFileReader {
+public class DefaultTextAppFileReader implements AppFileReader {
 
     @Override
     public List<String> readNamesFromFIle(String fileNameToRead) {
 
         List<String> result = new LinkedList<>();
 
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileNameToRead)));
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileNameToRead), StandardCharsets.UTF_8))){
             String line;
             while ((line = br.readLine()) != null) {
                 result.add(line);
@@ -21,7 +21,8 @@ public class defaultTextAppFileReader implements AppFileReader {
             return result;
 
         } catch (FileNotFoundException e) {
-            System.out.println("Error in opening file " + fileNameToRead + "!");
+            System.out.println("Error: " + fileNameToRead + " does not exist!");
+
         } catch (IOException ioException) {
             System.out.println("Error in reading lines from file " + fileNameToRead + "!");
         }
