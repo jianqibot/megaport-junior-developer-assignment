@@ -8,7 +8,7 @@ import java.util.List;
 public class DefaultTextAppFileReader implements AppFileReader {
 
     @Override
-    public List<String> readNamesFromFIle(String fileNameToRead) {
+    public List<String> readNamesFromFile(String fileNameToRead) {
 
         List<String> result = new LinkedList<>();
 

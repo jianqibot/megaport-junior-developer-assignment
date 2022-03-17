@@ -25,7 +25,7 @@ public class ConsoleApp {
     public static void main(String[] args) {
         ConsoleApp app = new ConsoleApp(new DefaultTextAppFileReader(), new DefaultSorter(), new DefaultTextAppFileWriter());
         System.out.println("sort-names " + args[0]);
-        List<String> names = app.fileReader.readNamesFromFIle(args[0]);
+        List<String> names = app.fileReader.readNamesFromFile(args[0]);
         List<String> sortedNames = app.sorter.sort(names);
         if (sortedNames != null) {
             sortedNames.forEach(System.out::println);
